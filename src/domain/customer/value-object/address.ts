@@ -31,16 +31,16 @@ export default class Address {
     
     validate() {
       if (this._street.length === 0) {
-        throw new Error("Street is required");
+        throw new Error("O nome da rua é obrigatório!");
       }
       if (this._number === 0) {
-        throw new Error("Number is required");
+        throw new Error("O número é obrigatório!");
       }
       if (this._zip.length === 0) {
-        throw new Error("Zip is required");
+        throw new Error("O CEP é obrigatório!");
       }
       if (this._city.length === 0) {
-        throw new Error("City is required");
+        throw new Error("A cidade é obrigatória!");
       }
     }
   
