@@ -1,27 +1,44 @@
+import Entity from "../../@shared/entity/entity.abstract";
+import NotificationError from "../../@shared/notification/notification.error";
 import ProductInterface from "./product.interface";
 
-export default class Product implements ProductInterface {
+export default class Product extends Entity implements ProductInterface {
 
-    private _id: string;
     private _name: string;
     private _price: number;
 
-    constructor(id: string, name: string, price: number) {
-        this._id = id;
+    constructor(id: string, name: string, price: number)  {
+        super();
+        this.id = id;
         this._name = name;
         this._price = price;
         this.validate();
+
+        if (this.notification.hasErrors()){
+            throw new NotificationError(this.notification.getErrors());
+        }
     }
 
     validate(): boolean {
-        if (this._id.length ===0) {
-            throw new Error("O id é obrigatório!");
+        if (this.id.length ===0) {
+            this.notification.addError({
+                context: "product",
+                message: "O id é obrigatório!"
+            });
+
         }
         if (this._name.length ===0) {
-            throw new Error("O nome é obrigatório!");
+            this.notification.addError({
+                context: "product",
+                message: "O nome é obrigatório!"
+            });
+
         }
         if (this._price < 0) {
-            throw new Error("O preço deve ser maior que zero");
+            this.notification.addError({
+                context: "product",
+                message: "O preço deve ser maior que zero"
+            })
         }
         return true;
     }
@@ -43,10 +60,5 @@ export default class Product implements ProductInterface {
     get price() {
         return this._price;
     }
-
-    get id() {
-        return this._id;
-    }
-
 
 }

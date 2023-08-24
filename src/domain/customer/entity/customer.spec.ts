@@ -7,13 +7,13 @@ describe("Customer test", () => {
     it('Deve dar erro quando o id está vazio', () => {
         expect(() => {
             let customer = new Customer("", "João")
-        }).toThrowError('O ID é obrigatório!');
+        }).toThrowError('customer: O ID é obrigatório!');
     });
 
     it('Deve dar erro quando o nome está vazio', () => {
         expect(() => {
             let customer = new Customer("123", "")
-        }).toThrowError('O nome é obrigatório!');
+        }).toThrowError('customer: O nome é obrigatório!');
     });
 
     it('Deve trocar o nome', () => {

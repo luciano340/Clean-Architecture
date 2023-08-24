@@ -89,6 +89,5 @@ describe("Teste End to End para Produtos", () => {
         const product2 = listResponse.body.products[1];
         expect(product2.name).toBe("Maça");
         expect(product2.price).toBe(5);
-
     });
 })

@@ -1,17 +1,23 @@
+import Entity from "../../@shared/entity/entity.abstract";
+import NotificationError from "../../@shared/notification/notification.error";
 import Address from "../value-object/address";
 
-export default class Customer {
+export default class Customer extends Entity {
 
-    private _id: string;
     private _name: string;
     private _address!: Address;
     private  _active= false;
     private _rewardPoints = 0;
 
     constructor(id: string, name: string) {
-        this._id = id;
+        super();
+        this.id = id;
         this._name = name;
         this.validate();
+
+        if (this.notification.hasErrors()){
+            throw new NotificationError(this.notification.getErrors());
+        }
     }
 
     get name(): string {
@@ -22,20 +28,22 @@ export default class Customer {
         return this._address;
     }
 
-    get id(): string {
-        return this._id;
-    }
-
     get rewardPoints(): number {
         return this._rewardPoints
     }
 
     validate() {
         if (this._name.length === 0) {
-            throw new Error('O nome é obrigatório!');           
+            this.notification.addError({
+                context: "customer",
+                message: "O nome é obrigatório!"
+            })        
         }
-        if (this._id.length === 0) {
-            throw new Error('O ID é obrigatório!');           
+        if (this.id.length === 0) {
+            this.notification.addError({
+                context: "customer",
+                message: "O ID é obrigatório!"
+            })           
         }
     }
 
