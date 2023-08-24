@@ -13,8 +13,8 @@ const MockRepository = () => {
     }
 }
 
-describe("Teste unitário para a listagem de todos os usuários", () => {
-    it('Deve listar todos os clientes ', async () => {
+describe("Teste unitário para a listagem de todos os produtos", () => {
+    it('Deve listar todos os produtos ', async () => {
         const respository = MockRepository();
         const useCase = new ListProductUseCase(respository);
         const output = await useCase.execute({});
